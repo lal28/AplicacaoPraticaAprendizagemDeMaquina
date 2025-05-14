@@ -1,6 +1,6 @@
 # Classificador de Flores com KNN
 
-Esta aplicação é um exemplo simples de um classificador de flores usando o algoritmo KNN aplicado ao dataset Iris. A aplicação é construída com Python e Flask, e exibe tanto a predição para novos valores quanto as métricas de desempenho (acurácia, precisão e recall) para os conjuntos de treinamento e teste. Além disso, o front-end apresenta gráficos da matriz de confusão e da superfície de decisão, e a interface conta com uma logo da UFCA centralizada no topo.
+Esta aplicação é um exemplo simples de um classificador Classificador Interativo com KNN e Árvore de Decisão aplicado ao dataset Iris. A aplicação é construída com Python e Flask, e exibe tanto a predição para novos valores quanto as métricas de desempenho (acurácia, precisão e recall) para os conjuntos de treinamento e teste. Além disso, o front-end apresenta gráficos da matriz de confusão e da superfície de decisão, e a interface conta com uma logo da UFCA centralizada no topo, e breve explicação sobre KNN e Árvore de decisão.
 
 ## Pré-requisitos
 
@@ -55,6 +55,9 @@ A estrutura básica do projeto é a seguinte:
 
 ```
 KNN-back-front-sample/
+├── static/              # css e imagens da aplicação
+|   └── img/             # imagens 
+|   └── style.css        # estilos  
 ├── templates/
 │   └── front.html       # Front-end da aplicação
 ├── venv/                # Ambiente virtual (gerado)
@@ -65,10 +68,11 @@ KNN-back-front-sample/
 
 ## Uso da Aplicação
 
+- **Selecione o odelo:** Selecione qual modelo deseja usar.
 - **Treino:** Clique no botão "Treino" para treinar o classificador usando o dataset Iris.
 - **Teste:** Clique no botão "Teste" para visualizar as métricas de desempenho do modelo (tanto para o conjunto de treinamento quanto para o teste), além dos gráficos da matriz de confusão e da superfície de decisão.
 - **Teste Novo Valor:** Preencha os campos com as medidas de uma nova amostra e clique em "Enviar Valores" para obter a predição.
 
 ---
 
-Este projeto serve como exemplo básico para aprendizado e demonstração do uso do Flask e do KNN. Sinta-se à vontade para expandir ou modificar conforme necessário.
+Este projeto serve como exemplo básico para aprendizado e demonstração do uso do Flask, KNN e Árvore de decisão. Sinta-se à vontade para expandir ou modificar conforme necessário.

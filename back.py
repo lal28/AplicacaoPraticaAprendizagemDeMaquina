@@ -9,6 +9,8 @@ import base64
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
+# ::ALTERADO:: Importando o classificador Decision Tree
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, confusion_matrix
 
 app = Flask(__name__)
@@ -31,11 +33,18 @@ def train():
     # Dividir em treino e teste (70% treino, 30% teste)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-    # Criar e treinar o classificador KNN (usando os 4 atributos)
-    model = KNeighborsClassifier(n_neighbors=3)
+    # ::ALTERADO:: Verificar qual modelo o usuário selecionou
+    model_type = request.json.get('model_type', 'knn')
+    
+    # ::ALTERADO:: Criar e treinar o classificador selecionado
+    if model_type == 'dt':
+        model = DecisionTreeClassifier(random_state=42)
+    else:  # knn por padrão
+        model = KNeighborsClassifier(n_neighbors=3)
+    
     model.fit(X_train, y_train)
 
-    return jsonify({"message": "Treinamento concluído"})
+    return jsonify({"message": f"Treinamento concluído com {model_type.upper()}"})
 
 @app.route('/test', methods=['GET'])
 def test():
@@ -122,7 +131,13 @@ def test():
     iris = load_iris()
     X_train_2 = X_train[:, 2:4]
     X_test_2 = X_test[:, 2:4]
-    model2 = KNeighborsClassifier(n_neighbors=3)
+    
+    # ::ALTERADO:: Criar um modelo do mesmo tipo que o modelo global para a superfície de decisão
+    if isinstance(model, DecisionTreeClassifier):
+        model2 = DecisionTreeClassifier(random_state=42)
+    else:
+        model2 = KNeighborsClassifier(n_neighbors=3)
+    
     model2.fit(X_train_2, y_train)
     
     x_min, x_max = X_train_2[:, 0].min() - 1, X_train_2[:, 0].max() + 1
@@ -148,6 +163,9 @@ def test():
     plt.close()
     ds_img = base64.b64encode(buf_ds.getvalue()).decode('utf-8')
     
+    # ::ALTERADO:: Identificar qual modelo está sendo usado
+    model_type = "KNN" if isinstance(model, KNeighborsClassifier) else "Decision Tree"
+    
     # Retorna todos os resultados
     return jsonify({
         "test_metrics": metrics_test,
@@ -155,7 +173,8 @@ def test():
         "train_metrics": metrics_train,
         "manual_train_metrics": manual_metrics_train,
         "confusion_matrix": cm_img,
-        "decision_surface": ds_img
+        "decision_surface": ds_img,
+        "model_type": model_type  # ::ALTERADO:: Adicionando informação sobre o modelo usado
     })
 
 
@@ -175,8 +194,12 @@ def predict():
     result = iris.target_names[pred]
     # Calcula a acurácia do modelo no conjunto de treino
     acc_train = model.score(X_train, y_train)
+    
+    # ::ALTERADO:: Identificar qual modelo está sendo usado
+    model_type = "KNN" if isinstance(model, KNeighborsClassifier) else "DT"
+    
     # Retorna o resultado com a acurácia formatada
-    return jsonify({"predicao": f"{result} (ACC: {round(acc_train*100, 0)}%)"})
+    return jsonify({"predicao": f"{result} ({model_type}, ACC: {round(acc_train*100, 0)}%)"})
 
 
 if __name__ == '__main__':
