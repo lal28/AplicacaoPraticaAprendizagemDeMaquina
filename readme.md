@@ -68,7 +68,7 @@ KNN-back-front-sample/
 
 ## Uso da Aplicação
 
-- **Selecione o odelo:** Selecione qual modelo deseja usar.
+- **Selecione o Modelo:** Selecione qual modelo deseja usar.
 - **Treino:** Clique no botão "Treino" para treinar o classificador usando o dataset Iris.
 - **Teste:** Clique no botão "Teste" para visualizar as métricas de desempenho do modelo (tanto para o conjunto de treinamento quanto para o teste), além dos gráficos da matriz de confusão e da superfície de decisão.
 - **Teste Novo Valor:** Preencha os campos com as medidas de uma nova amostra e clique em "Enviar Valores" para obter a predição.
