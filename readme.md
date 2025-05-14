@@ -1,6 +1,6 @@
-# Classificador de Flores com KNN
+# Classificador de Flores com KNN e Decision Tree
 
-Esta aplicação é um exemplo simples de um classificador Classificador Interativo com KNN e Árvore de Decisão aplicado ao dataset Iris. A aplicação é construída com Python e Flask, e exibe tanto a predição para novos valores quanto as métricas de desempenho (acurácia, precisão e recall) para os conjuntos de treinamento e teste. Além disso, o front-end apresenta gráficos da matriz de confusão e da superfície de decisão, e a interface conta com uma logo da UFCA centralizada no topo, e breve explicação sobre KNN e Árvore de decisão.
+Esta aplicação é um exemplo simples de um classificador Classificador Interativo com KNN e Árvore de Decisão(Decision Tree) aplicado ao dataset Iris. A aplicação é construída com Python e Flask, e exibe tanto a predição para novos valores quanto as métricas de desempenho (acurácia, precisão e recall) para os conjuntos de treinamento e teste. Além disso, o front-end apresenta gráficos da matriz de confusão e da superfície de decisão, e a interface conta com uma logo da UFCA centralizada no topo, e breve explicação sobre KNN e Árvore de decisão.
 
 ## Pré-requisitos
 
